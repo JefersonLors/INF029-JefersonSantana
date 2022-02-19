@@ -4,7 +4,8 @@
 int main( ){
   int fatorial(int valor);
   
-  int valor = 0;
+  int valor = 0,
+      fat = 0;
 
   enum CONTINUA { NAO = 0, SIM = 1 };
   
@@ -12,15 +13,20 @@ int main( ){
 
   puts("\n");
   do{
-    printf( "-> [ Fatorial é um número natural inteiro e positivo\n"
+    printf( "-> [ Fatorial é um número natural, inteiro e positivo\n"
             "     representado por n!. Assim, seja n = 3\n"
-            "     n! = 3.(3-1).(3-2) = 6! ]\n\n");
+            "     3! = 3.(3-1).(3-2) = 6 ]\n\n");
     
     printf( "-> Digite um número para saber seu fatorial\n");
     printf( "   > numero = " );
     scanf( "%d", &valor );
 
-    printf("\n   > %d! = %d \n", valor, fatorial( valor ) );
+    fat = fatorial( valor );
+
+    if( fat == 0 ){
+      printf("\n   < Não é possível calcular o fatorial deste número\n" );
+    }else{ 
+      printf("\n   > %d! = %d \n", valor, fat );}
 
     do{
       printf( "\n-> Deseja obter o fatorial de outro número?\n"
