@@ -28,7 +28,7 @@ int main( ){
       printf( "   > numero [%d] = %d\n", numero, valores->armazenados[numero] );}
     
     do{
-      printf( "\n-> Deseja armazenar mais três números?\n"
+      printf( "\n-> Deseja armazenar mais quatro números?\n"
               "       [1] SIM               [0] NAO\n\n   > " );
       scanf( "%d", &resposta );
     }while( resposta != NAO && resposta != SIM );
