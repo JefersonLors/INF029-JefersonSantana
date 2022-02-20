@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define quantidade 3
+#define quantidade 4
 
 int main( ){
   char *ler3letras( void );
@@ -13,17 +13,18 @@ int main( ){
 
   puts("\n");
   do{
-    printf( "-> Digite três números\n");
-    letras = ler3numeros( );
+    printf( "-> Digite três letras\n");
+    letras = ler3letras( );
     
-    printf( "\n-> Os números digitados foram\n");
-    for( int subscrito = 0; subscrito < quantidade; subscrito++ ){
-      printf( "   > numero [%d] = %d\n", subscrito, numeros[subscrito] );}
+    printf( "\n-> As letras digitadas foram\n");
+    for( int subscrito = 0; subscrito < (quantidade - 1); subscrito++ ){
+      printf( "   > letra [%d] = %c\n", subscrito, letras[subscrito] );}
     
     do{
-      printf( "\n-> Deseja armazenar mais três números?\n"
+      printf( "\n-> Deseja armazenar mais três letras?\n"
               "       [1] SIM               [0] NAO\n\n   > " );
       scanf( "%d", &resposta );
+      getchar( );
     }while( resposta != NAO && resposta != SIM );
 
     if( resposta == NAO ){
@@ -34,11 +35,12 @@ int main( ){
   return 0;
 }
 
-int *ler3numeros( ){
-  static int numero[ quantidade ]; 
+char *ler3letras( ){
+  static char letras[ quantidade ] = {' ',' ',' ','\0'}; 
 
-  for( int subscrito = 0; subscrito < quantidade; subscrito++ ){
-    printf( "   > numero [%d] = ", subscrito );
-    scanf( "%d", &numero[subscrito] );}
-  return numero;
+  for( int subscrito = 0; subscrito < (quantidade - 1); subscrito++ ){
+    printf( "   > letra [%d] = ", subscrito );
+    scanf( "%c", &letras[subscrito] );
+    getchar();}
+  return letras;
 }
