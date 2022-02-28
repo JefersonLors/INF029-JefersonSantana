@@ -1,0 +1,127 @@
+----------------------------- ESQUEMA PROJETO ESCOLA -------------------------------
+
+** Definir vagas das disciplinas
+** Lista de aniversariantes do mes: atual ou manual?
+**
+
+
+
+1 - Criar cadastros
+
+    Cadastro de Alunos ( Matrícula, Nome, Sexo, Data Nascimento, CPF )
+    Cadastro de Professores ( Matrícula, Nome, Sexo, Data Nascimento, CPF )
+    Cadastro de Disciplinas ( Nome, Código, Semestre, Professor )
+
+2 - Validação de dados do cadastro
+
+    validação básica de cada item solicitado.
+
+3 - Mecanismo de matrícula de aluno e professores em disciplinas
+        
+4 - Mecanismo de atualização e exclusão de alunos em disciplinas.
+
+
+
+struct dados{
+    char matricula[ ],
+         nome[ ],
+         data[ ],
+         nascimento[ ],
+         CPF[ ];
+};
+typedef struct dados Dados;
+
+struct Disciplinas{
+    char nome[ ],
+         codigo[ ],
+         semestre[ ];
+    int vagas,
+        quantidade;
+         Professor docente;
+};
+typedef struct Discplinas Disciplinas;
+
+struct Aluno{
+    Dados dadoAluno;
+    Disciplinas matriculado[ ];
+    int quantidade;
+};
+
+struct Profesor{
+    Dados dadoProfessor;
+    int quantidade;
+};
+
+typedef struct Professor Professor;
+int main ( ){
+    Dados ana;
+
+    ana.dadoAluno.
+
+   
+}
+
+LHA1      nome             semestre                  professor
+LHA2
+LHA3
+LHA4
+LHA5
+LHA6
+
+-> Digite o codigo de uma discplina para sober os alunos matriculados
+-> LHA1
+
+
+
+Listar Alunos
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+
+-> [1] Listar por sexo
+-> [2] Lista por nascimento
+-> [3] Listar por nome
+
+
+Listar Professor
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+    matricula       nome         sexo         nascimento            cpf 
+
+-> [1] Listar por sexo
+-> [2] Lista por nascimento
+-> [3] Listar por nome
+
+
+
+//ana
+Anabele
+Analfabeto
+
+a n a
+A bato n a
+
+Aluno carlos;
+
+
+carlos.dadoAluno.nome = "carlos";
+carlos.dadoAluno.data = "02/05/2002";
+carlos.quantidade++;
+
+
+
+static 
+
+
+
+
+
+
