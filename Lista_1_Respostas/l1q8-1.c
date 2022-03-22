@@ -19,7 +19,6 @@ int main( ){
 
   enum CONTINUA { NAO = 0, SIM = 1 };
   int resposta = SIM;
-  
   Dados *cliente = NULL;
 
   puts("\n");
