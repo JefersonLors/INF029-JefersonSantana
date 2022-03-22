@@ -6,7 +6,6 @@
 struct numeros{
     int armazenados[quantidade];
 };
-
 typedef struct numeros Numeros;
 
 int main( ){

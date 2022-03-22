@@ -43,7 +43,7 @@ int main( ){
 
 Palavras *ler3palavras( ){
   static Palavras armazem[quantidade];
-
+  
   for( int local = 0; local < quantidade; local++ ){
     printf( "   > palavra [%d] = ", local );
     scanf( "%s", armazem[local].palavra );}

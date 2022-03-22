@@ -1,3 +1,3 @@
-cd Trabalho_1
-gcc trab1q1.c -o trab1q1
-./trab1q1
+cd Lista_1_Respostas
+gcc l1q7.c -o l1q7
+./l1q7

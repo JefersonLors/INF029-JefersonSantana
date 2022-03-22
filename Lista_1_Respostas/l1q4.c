@@ -39,6 +39,6 @@ int *ler3numeros( ){
 
   for( int subscrito = 0; subscrito < quantidade; subscrito++ ){
     printf( "   > numero [%d] = ", subscrito );
-    scanf( "%d", &numero[subscrito] );}
+    scanf( "%d", &numero[subscrito] );} ///melhorar a verificao de valor
   return numero;
 }
