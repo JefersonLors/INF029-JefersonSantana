@@ -1,3 +1,3 @@
-cd Trabalho_1
-gcc novoCorretor.c -o novoCorretor
-./novoCorretor.c
+cd Trabalho_2
+gcc main.c -o main
+./main

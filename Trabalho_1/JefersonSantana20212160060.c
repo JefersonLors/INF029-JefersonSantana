@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include "JefersonSantana20212160060.h"
 
-bool q1( char *data ){
+bool Q1( char *data ){
     bool validaFormato( char* );
     bool validaCaracteres( char* );
     bool validaTamanho( char* );

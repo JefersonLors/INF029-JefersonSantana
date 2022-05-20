@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
+#include "JefersonSantana20212160060.h"
 
 void testQ1();
 void testQ2();
@@ -31,25 +32,25 @@ int main(){
 void testQ1(){
     char str[11];
     strcpy(str,"29/02/2015");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"29/02/2012");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"9/13/2014");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"45/4/2014");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"12/1/15");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"1/9/2016");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"//2016");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"1//20");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"1/R/2016");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     strcpy(str,"1/12/19");
-    printf("%-*s - data %s\n", 10, str, ( q1(str) ? "correta" : "incorreta" )  );
+    printf("%-*s - data %s\n", 10, str, ( Q1(str) ? "correta" : "incorreta" )  );
     puts("");
 }
 

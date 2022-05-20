@@ -22,8 +22,8 @@
 // #################################################
 
 
-#ifndef JefersonSantana20212160060.h
-#define JefersonSantana20212160060.h
+#ifndef JefersonSantana20212160060_h
+#define JefersonSantana20212160060_h
 #include <stdbool.h>
 
 #define TAMANHO_DATA 16
@@ -33,9 +33,13 @@ bool ehNumero( char );
 void limpaDado( char* );
 bool bissexto( char* );
 
-bool q1( char *data );
+bool Q1( char * );
 int* q2( char *dataNascimento, char *dataAtual );
-
+int q3( const char texto[], char letra );
+int q4( const char texto[], const char palavra[], int posicoes[] );
+int q5( int valor );
+unsigned q6( const unsigned valor, const unsigned contido );
+    
 bool ehNumero( char caracter ){
     if( caracter >= 48 && caracter <= 57 )
         return true;
