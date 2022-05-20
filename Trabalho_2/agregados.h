@@ -121,11 +121,21 @@ bool encerramento( ){
     }while( true );
 }
 bool inserirPrimeiro( int numero, primeiro **head ){
+    primeiro *atual, 
+             *novo;
+    
     if( (*head) == NULL ){
-       
-        
-        
-    }
+        (*head) = (primeiro*)malloc( sizeof(primeiro) );
+        (*head)->valor = numero;
+        (*head)->next = NULL;
+    }else{
+        atual = (*head);
+        while( atual->next != NULL ){
+            atual = atual->next;}
+        novo = (primeiro*)malloc( sizeof(primeiro) );
+        novo->valor = numero;
+        novo->next = NULL;
+        atual->next = novo;}
     return true;
 }
 bool inserirSegundo( int numero, segundo**head ){
@@ -189,8 +199,8 @@ bool criaDecimo( int tamanho, decimo**head ){
 short getTamanho( void ){
     int tamanho;
 
-    printf( "\n|Ops! Essa lista está vazia.         |\n"
-                "|Digite o Tamanho dela para criarmos.|\n\n"
+    printf( "\n|Ops! Essa lista não tem espaço      |\n"
+                "|Digite o tamanho dela para criarmos.|\n\n"
                 "Novo tamanho = ");
     scanf( "%d", &tamanho );    
     while( tamanho < 1 ){
