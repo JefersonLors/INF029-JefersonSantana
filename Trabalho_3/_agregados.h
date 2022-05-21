@@ -1,5 +1,5 @@
-#ifndef AGREGADOS_H
-#define AGREGADOS_H
+#ifndef _AGREGADOS_H
+#define _AGREGADOS_H
 
 #define TAM_BASE 10
 typedef struct numero{
@@ -50,8 +50,7 @@ unsigned menuColunas( void ){
     return resposta;
 }
 bool encerramento( ){
-    do{ printf( "\n\n\t Você irá perder todos os seus dados"
-                "\n\n            Confirma encerramento?\n\n"
+    do{ printf( "\n\n            Confirma encerramento?\n\n"
                 "         [1] SIM                [2] NÃO\n\n"
                 " [ ] <- " );
         switch( getchar( ) ){
