@@ -5,101 +5,112 @@
 
 int main( ){
     bool confirma = false;
-
+    
     int resposta = 0,
-        quantidade = 0,
+        quantidade[TAM_BASE] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         valor = 0;
-
-    primeiro *[10] 
     
-    primeiro *Ihead = NULL;
-    segundo *IIhead = NULL;
-    terceiro *IIIhead = NULL;
-    quarto *IVhead = NULL;
-    quinto *Vhead = NULL;
-    sexto *VIhead = NULL;
-    setimo *VIIhead = NULL;
-    oitavo *VIIIhead = NULL;
-    nono *IXhead = NULL;
-    decimo *Xhead = NULL;
+    unsigned TAMANHOS[TAM_BASE] = { 0 }; 
     
-    do{
-        switch( MENU( ) ){
+    coluna *primeiraHead = NULL,
+           *segundaHead = NULL,
+           *terceiraHead = NULL,
+           *quartaHead = NULL,
+           *quintaHead = NULL,
+           *sextaHead = NULL,
+           *setimaHead = NULL,
+           *oitavaHead = NULL,
+           *nonaHead = NULL,
+           *decimaHead = NULL;
+    
+    coluna *BASE[TAM_BASE] = { primeiraHead, segundaHead, terceiraHead, quartaHead, quintaHead,
+                               sextaHead, setimaHead, oitavaHead, nonaHead, decimaHead };
+    
+    do{ switch( MENU( ) ){
             case 1: 
                 do{
-                    printf( "\n\n==================== INSERINDO ====================\n\n"
-                            "SELECIONE A COLUNA PARA INSERIR O ELEMENTO [0 SAIR]\n\n"
-                            " [1]  [2]  [3]  [4]  [5]  [6]  [7]  [8]  [9]  [10]\n\n");
-                    printf( " [R] = " );
-                    scanf( "%d", &resposta );
-
-                    while( resposta < 1 && resposta > 10){
-                        printf( "\nOpção inválida!\n\n" 
-                                "\n[R] = " );
-                        scanf( "%d", &resposta );}
+                    printf( "\n\n==================== INSERINDO ====================\n\n");
+                    resposta = menuColunas( );
+                    if( resposta == 0 ){break;}
                     
-                    if( resposta == 0 ){
-                        break;
-                    }else if( resposta == 1 ){
-                        printf( "\n\n==================== COLUNA [1] ====================\n\n");
-                             
-                        if( Ihead == NULL ) {
-                            tamanho.Primeiro = getTamanho( );}
+                    printf( "\n\n==================== COLUNA [%d] ====================\n\n", resposta );  
+                    if( BASE[resposta-1] == NULL ) {
+                        TAMANHOS[resposta-1] = getTamanho( );
+                        criaColuna( TAMANHOS[resposta-1], &BASE[resposta-1] );}
+                    
+                    printf( "\n\nINSIRA OS ELEMENTO DA COLUNA [%d] [0 SAIR]\n\n"
+                            "TAMANHO COLUNA: %d\n\n", resposta, TAMANHOS[resposta-1] );
+                    
+                    if( quantidade[resposta-1] + 1 <= TAMANHOS[resposta-1] ){
+                        printf( "[%d] = ", quantidade[resposta-1]+1 );
+                        scanf( "%d", &valor );
                         
-                        quantidade = 1;
-                        printf( "\n\nINSIRA OS ELEMENTOS DA COLUNA [1] [0 SAIR]\n\n" );
-                        do{
-                            printf( "[%d] = ", quantidade );
-                            scanf( "%d", &valor );
-                            if( valor == 0 ) break;
-                            if( inserirPrimeiro( valor, &Ihead  ) ){
-                                quantidade++;
-                            }else{
-                                puts( "\nOps! O valor não foi adicionado!\n");}
-                        }while( quantidade <= tamanho.Primeiro );
-                        if( quantidade == tamanho.Primeiro ){
-                            puts( "\nlista cheia!\n");}
-                    }else if( resposta == 2 ){
-                        
-                    }else if( resposta == 3 ){
-                        
-                    }else if( resposta == 4 ){
-                        
-                    }else if( resposta == 5 ){
-                        
-                    }else if( resposta == 6 ){
-                        
-                    }else if( resposta == 7 ){
-                        
-                    }else if( resposta == 8 ){
-                        
-                    }else if( resposta == 9 ){
-                        
-                    }else if ( resposta == 10 ){
-                        
-                    }else{
-                        puts( "\n { Escolha uma opção válida! }\n");}
-            
+                        if( valor == 0 ){
+                            puts( "\n\nInserção encerrada\n" );
+                            break;}
+                        if( insereValor( valor, &BASE[resposta-1] ) ){
+                            quantidade[resposta-1]++;
+                        }else{
+                            puts( "\nOps! O valor não foi adicionado!\n");}
+                    }else{ puts( "\nlista cheia!\n");}
                 }while( true );
-        
-
             break;
-            
-            case 2:
-            break;
-            
-            case 3:
-            break;
-            
-            case 4:
-            break;
-            
+            case 2: 
+                printf( "\n\n==================== LISTA GERAL ====================\n\n" );
+                listaGeral( BASE ); 
+                break;
+            case 3: 
+                printf( "\n\n==================== LISTA ORDENADA ====================\n\n" );
+                listaOrdenada( quantidade, BASE ); 
+                break;
+            case 4: 
+                printf( "\n\n================= LISTA GERAL ORDENADA ==================\n\n" );
+                listagGeralOrdenada( quantidade, BASE ); 
+                break;
             case 5:
+                do{ printf( "\n\n==================== EXCLUINDO ====================\n\n" );
+                    resposta = menuColunas( );
+                    if( resposta == 0 ){break;}
+                    
+                    printf( "\n\n==================== COLUNA [%d] ====================\n\n" 
+                            "\n\nINSIRA O ELEMENTO DA COLUNA [%d] PARA EXCLUIR [0 SAIR]\n\n"
+                            , resposta, resposta );
+                    
+                    printf( "[X] = " );
+                    scanf( "%d", &valor );
+                    
+                    if( valor == 0 ){
+                        puts( "\n\nExclusão encerrada\n" );
+                        break;}
+                    if( excluiValor( valor, BASE[resposta-1] ) ){
+                        puts( "\nValor excluído!\n");
+                    }else{
+                        puts( "\nOps! O valor não está na coluna.\n");}
+                }while( true );
             break;
-            
             case 6:
+                do{
+                    printf( "\n\n==================== INCREMENTADO ====================\n\n");
+                    resposta = menuColunas( );
+                    if( resposta == 0 ){break;}
+                    
+                    printf( "\n\n==================== COLUNA [%d] ====================\n\n" 
+                            "\n\nINSIRA O TAMANHO DO COMPLEMENTO PARA A COLUNA [%d] [0 SAIR]\n\n"
+                            , resposta, resposta );
+                    
+                    printf( "[+] = " );
+                    scanf( "%d", &valor );
+                    
+                    if( valor == 0 ){
+                        puts( "\n\nComplemento encerrado\n" );
+                        break;}
+                    if( aumentaColuna( valor, BASE[resposta-1] ) ){
+                        TAMANHOS[resposta-1] += valor;
+                        printf( "\nNovo tamanho da COLUNA [%d]: \n", TAMANHOS[resposta-1]);
+                    }else{ 
+                        puts( "\nOps! Coluna não incrementada.\n"); }
+                }while( true );
             break;
-            
             default:
                 confirma = encerramento( );
                 break;        

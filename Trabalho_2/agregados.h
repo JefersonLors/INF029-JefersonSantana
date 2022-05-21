@@ -1,101 +1,29 @@
 #ifndef AGREGADOS_H
 #define AGREGADOS_H
 
-typedef struct primeiro{
+#define TAM_BASE 10
+typedef struct numero{
     int valor;
-    struct primeiro *next;
-}primeiro;
+    struct numero *next;
+}coluna;
 
-typedef struct segundo{
-    int valor;
-    struct segundo *next;
-}segundo;
-
-typedef struct terceiro{
-    int valor;
-    struct terceiro *next;
-}terceiro;
-
-typedef struct quarto{
-    int valor;
-    struct quarto *next;
-}quarto;
-
-typedef struct quinto{
-    int valor;
-    struct tequinto *next;
-}quinto;
-
-typedef struct sexto{
-    int valor;
-    struct sexto *next;
-}sexto;
-
-typedef struct setimo{
-    int valor;
-    struct setimo *next;
-}setimo;
-
-typedef struct oitavo{
-    int valor;
-    struct oitavo *next;
-}oitavo;
-
-typedef struct nono{
-    int valor;
-    struct nono *next;
-}nono;
-
-typedef struct decimo{
-    int valor;
-    struct decimo *next;
-}decimo;
-
-struct{
-    unsigned Primeiro,
-             Segundo,
-             Terceiro,
-             Quatro,
-             Quinto,
-             Sexto,
-             Setimo,
-             Oitavo,
-             Nono,
-             Decimo;
-}tamanho;
 unsigned MENU( void );
 bool encerramento( void ); 
-
-///FUNÇÕES DE INSERÇÃO
-bool inserirPrimeiro( int, primeiro** );
-bool inserirSegundo( int, segundo** );
-bool inserirTerceiro( int, terceiro** );
-bool inserirQuatro( int, quarto** );
-bool inserirQuinto( int, quinto** );
-bool inserirSexto( int, sexto** );
-bool inserirSetimo( int, setimo** );
-bool inserirOitavo( int, oitavo** );
-bool inserirNovo( int, nono** );
-bool inserirDecimo( int, decimo** );
-////------------------
-////FUNÇÕES DE CRIAÇÃO DE SLOTS
-bool criaPrimeiro( int, primeiro** );
-bool criaSegundo( int, segundo** );
-bool criaTerceiro( int, terceiro** );
-bool criaQuatro( int, quarto** );
-bool criaQuinto( int, quinto** );
-bool criaSexto( int, sexto** );
-bool criaSetimo( int, setimo** );
-bool criaOitavo( int, oitavo** );
-bool criaNovo( int, nono** );
-bool criaDecimo( int, decimo** );
-////------------------
+bool insereValor( int, coluna** );
+bool excluiValor( int, coluna* );
+void listaGeral( coluna** );
+void listaOrdenada( int*, coluna** );
+void listagGeralOrdenada( int*, coluna** );
+bool criaColuna( int, coluna** );
 short getTamanho( void );
+bool aumentaColuna( int, coluna* );
+unsigned menuColunas( void );
 
+    
 unsigned MENU( void ){
     unsigned resposta = 0;
-    do{
-        printf( "\n================== BANCO DINÂMICO ==================\n\n"
+    
+    do{ printf( "\n================== BANCO DINÂMICO ==================\n\n"
                 "    MENU\n"
                 " [1] <- INSERIR ELEMENTO\n"
                 " [2] <- LISTAR TODOS OS ELEMENTOS\n"
@@ -109,6 +37,19 @@ unsigned MENU( void ){
     }while( resposta > 7 || resposta < 1 );
     return resposta;
 }
+unsigned menuColunas( void ){
+    int resposta = 0;
+        printf( "SELECIONE A COLUNA PARA INSERIR O ELEMENTO [0 SAIR]\n\n"
+            " [1]  [2]  [3]  [4]  [5]  [6]  [7]  [8]  [9]  [10]\n\n"
+            " [ ] = " );
+    scanf( "%d", &resposta );
+
+    while( resposta < 1 && resposta > 10){
+        printf( "\nOpção inválida!\n\n" 
+                "\n[R] = " );
+        scanf( "%d", &resposta );}
+    return resposta;
+}
 bool encerramento( ){
     do{ printf( "\n\nSe você encerrar o programa todos os dados serão perdidos.\n"
                 "        Você confirma esse encerramento?\n\n"
@@ -119,82 +60,6 @@ bool encerramento( ){
             case '2': return false;
             default: puts("Resposta inválida!");}
     }while( true );
-}
-bool inserirPrimeiro( int numero, primeiro **head ){
-    primeiro *atual, 
-             *novo;
-    
-    if( (*head) == NULL ){
-        (*head) = (primeiro*)malloc( sizeof(primeiro) );
-        (*head)->valor = numero;
-        (*head)->next = NULL;
-    }else{
-        atual = (*head);
-        while( atual->next != NULL ){
-            atual = atual->next;}
-        novo = (primeiro*)malloc( sizeof(primeiro) );
-        novo->valor = numero;
-        novo->next = NULL;
-        atual->next = novo;}
-    return true;
-}
-bool inserirSegundo( int numero, segundo**head ){
-    return true;
-}
-bool inserirTerceiro( int numero , terceiro**head ){
-    return true;
-}
-bool inserirQuatro( int numero, quarto**head ){
-    return true;
-}
-bool inserirQuinto( int numero, quinto**head ){
-    return true;
-}
-bool inserirSexto( int numero, sexto**head ){
-    return true;
-}
-bool inserirSetimo( int numero, setimo**head ){
-    return true;
-}
-bool inserirOitavo( int numero, oitavo**head ){
-    return true;
-}
-bool inserirNovo( int numero, nono**head ){
-    return true;
-}
-bool inserirDecimo( int numero, decimo**head ){
-    return true;
-}
-
-bool criaPrimeiro( int tamanho, primeiro**head ){
-    return true;
-}
-bool criaSegundo( int tamanho, segundo**head ){
-    return true;
-}
-bool criaTerceiro( int tamanho, terceiro**head ){
-    return true;
-}
-bool criaQuatro( int tamanho, quarto**head ){
-    return true;
-}
-bool criaQuinto( int tamanho, quinto**head ){
-    return true;
-}
-bool criaSexto( int tamanho, sexto**head ){
-    return true;
-}
-bool criaSetimo( int tamanho, setimo**head ){
-    return true;
-}
-bool criaOitavo( int tamanho, oitavo**head ){
-    return true;
-}
-bool criaNovo( int tamanho, nono**head ){
-    return true;
-}
-bool criaDecimo( int tamanho, decimo**head ){
-    return true;
 }
 short getTamanho( void ){
     int tamanho;
@@ -208,5 +73,152 @@ short getTamanho( void ){
                 "Novo tamanho = " );
         scanf( "%d", &tamanho );}
     return tamanho;
+}
+bool criaColuna( int tamanho, coluna **head ){
+    coluna *atual,
+           *novo;
+    
+    (*head) = (coluna*)malloc( sizeof(coluna) );
+    (*head)->valor = 0;
+    (*head)->next = NULL;
+    atual = (*head);
+    
+    while( tamanho > 1 ){
+        novo = (coluna*)malloc( sizeof(coluna) );
+        novo->valor = 0;
+        novo->next = NULL;
+        atual->next = novo;
+        atual = atual->next;
+        tamanho--;}
+    atual->next = NULL;
+    return true;
+}
+bool insereValor( int valor, coluna**head ){
+    coluna *atual = (*head);
+
+    while( atual->valor != 0 ){
+        atual = atual->next;}
+    atual->valor = valor;
+    
+    return true;    
+}
+bool excluiValor( int valor, coluna *head ){
+    if( head != NULL ){
+        coluna *atual = head;
+        while( atual->next != NULL ){
+            if( atual->valor == valor ){
+                atual->valor = 0;
+                return true;}
+            atual = atual->next;
+    }}return false;
+}
+bool aumentaColuna( int complemento, coluna *head ){
+    coluna *atual = head,
+           *novo = NULL; 
+
+    while( atual->next !=NULL ){
+        atual = atual->next;}
+    
+    while( complemento > 0 ){
+        novo = (coluna*)malloc( sizeof(coluna) );
+        novo->valor = 0;
+        novo->next = NULL;
+        atual->next = novo;
+        atual = atual->next;
+        complemento--;}
+    atual->next = NULL;
+}
+void listaGeral( coluna **BASE ){
+    coluna *atual = *BASE;
+    unsigned preenchido = 0;
+    
+    for( int e = 0; e < TAM_BASE; e++ ){
+        printf( " [ %d ]  ->", e+1 );   
+        if( BASE[e] != NULL ){
+            preenchido = 0;
+            atual = BASE[e];
+            while( atual != NULL ){
+                preenchido++; 
+                printf( "\t[ %d ]", atual->valor );
+                atual = atual->next;}
+                printf( "\t= %d %s", preenchido, (preenchido > 1 ? "ELEMENTOS" : "ELEMENTO" ) ); 
+        }else{ printf( "\tVAZIO");}
+        puts( "\n" );}  
+}
+void listaOrdenada( int *quantidades, coluna**BASE ){
+    coluna *primeiraHeadBAckup = NULL,
+           *segundaHeadBAckup = NULL,
+           *terceiraHeadBAckup = NULL,
+           *quartaHeadBAckup = NULL,
+           *quintaHeadBAckup = NULL,
+           *sextaHeadBAckup = NULL,
+           *setimaHeadBAckup = NULL,
+           *oitavaHeadBAckup = NULL,
+           *nonaHeadBAckup = NULL,
+           *decimaHeadBAckup = NULL;
+
+    coluna *BASE_BACKUP[TAM_BASE] = { primeiraHeadBAckup, segundaHeadBAckup, terceiraHeadBAckup,
+                                      quartaHeadBAckup, quintaHeadBAckup, sextaHeadBAckup,
+                                      setimaHeadBAckup, oitavaHeadBAckup, nonaHeadBAckup,
+                                      decimaHeadBAckup };
+
+    for( int e = 0; e < TAM_BASE; e++ ){
+        if( quantidades[e] > 0  ){
+            criaColuna( quantidades[e], &BASE_BACKUP[e]);}}
+   
+    for( int x = 0; x < TAM_BASE; x++ ){
+        coluna *atual = BASE[x],
+               *atualBackup = BASE_BACKUP[x];
+        
+        while( atualBackup != NULL ){
+            atualBackup->valor = atual->valor;
+            atual = atual->next;
+            atualBackup = atualBackup->next;}}
+    
+    coluna *primeiro,
+           *seguinte;
+    for( int coluna = 0; coluna < TAM_BASE; coluna++ ){
+        primeiro = BASE_BACKUP[coluna];
+        while( primeiro != NULL ){
+            seguinte = primeiro->next;
+            while( seguinte != NULL ){
+                if( primeiro->valor > seguinte->valor ){
+                    int valorBackup = primeiro->valor;
+                    primeiro->valor = seguinte->valor;
+                    seguinte->valor = valorBackup;}
+                seguinte = seguinte->next;
+            }primeiro = primeiro->next;
+        }
+    }
+    listaGeral(BASE_BACKUP);
+}
+void listagGeralOrdenada( int *quantidade, coluna **BASE ){
+    int tamanho = 0,
+        corredor = 0;
+    for( int x = 0; x < TAM_BASE; x++ ){
+        tamanho += quantidade[x];}
+
+    int *elementos = (int*)malloc( tamanho*sizeof( int ) ); 
+    coluna *atual = NULL;
+    
+    for( int coluna = 0; coluna < TAM_BASE; coluna++ ){
+        atual = BASE[coluna];
+        while( atual != NULL ){
+            elementos[corredor] = atual->valor;
+            atual = atual->next;
+            corredor++;}}
+    
+    for( int x = 1; x < tamanho; x++  ){
+        for(  int y = 0; y < tamanho-1; y++ ){
+            if( elementos[y] > elementos[y+1] ){
+                int backUp = elementos[y];
+                elementos[y] = elementos[y+1];
+                elementos[y+1] = backUp;}}}
+
+    printf( "[ ] ->" );
+    for( int x = 0; x < tamanho; x++ ){
+        if( elementos[x] != 0 ){
+            printf( "\t%d", elementos[x] );}}
+    puts("\n\n");
 }
 #endif
