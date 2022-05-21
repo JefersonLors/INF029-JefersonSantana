@@ -2,10 +2,19 @@
 #define _AGREGADOS_H
 
 #define TAM_BASE 10
+
 typedef struct numero{
     int valor;
     struct numero *next;
 }coluna;
+
+struct{
+    int quantidadesBackup,
+        TAMANHOBackup,
+        *DADOS;
+}backup;
+
+char *estruturaBackup = "estruturaBackup.txt";
 
 unsigned MENU( void );
 bool encerramento( void ); 
@@ -18,6 +27,10 @@ bool criaColuna( int, coluna** );
 short getTamanho( void );
 bool aumentaColuna( int, coluna* );
 unsigned menuColunas( void );
+bool criarArquivos( void );
+bool criaBackup( int*, int*, coluna** );
+bool recuperaBackup( int*, int*, coluna** );
+bool solicitaBAckup( void );
 
 unsigned MENU( void ){
     unsigned resposta = 0;
@@ -50,14 +63,30 @@ unsigned menuColunas( void ){
     return resposta;
 }
 bool encerramento( ){
-    do{ printf( "\n\n            Confirma encerramento?\n\n"
-                "         [1] SIM                [2] NÃO\n\n"
+    char resposta;
+    do{ printf( "\n\n=================== ENCERRAMENTO ===================\n\n"
+                "\n\t            Confirma encerramento?\n\n"
+                "\t         [1] SIM                [2] NÃO\n\n"
                 " [ ] <- " );
-        switch( getchar( ) ){
+        resposta = getchar( ); getchar( ); 
+        switch( resposta ){
             case '1': return true;
             case '2': return false;
-            default: puts("Resposta inválida!");}
+            default: puts("\n\t\t\t\tResposta inválida!");}
     }while( true );
+}
+bool solicitaBAckup( void ){
+    char resposta;
+    do{ printf( "\n\n====================== BACKUP ======================\n\n"
+                "\n\t            Deseja salvar os dados?\n\n"
+                "\t         [1] SIM                [2] NÃO\n\n"
+                " [ ] <- " );
+        resposta = getchar( ); getchar( ); 
+        switch( resposta ){
+            case '1': return true;
+            case '2': return false;
+            default: puts("\n\t\t\t\tResposta inválida!");}
+    }while( true );  
 }
 short getTamanho( void ){
     int tamanho;
@@ -230,5 +259,67 @@ void listagGeralOrdenada( int *quantidade, coluna **BASE ){
         if( elementos[x] != 0 ){
             printf( "\t%d", elementos[x] );}}
     puts("\n\n");
+}
+
+bool criarArquivos( ){
+    FILE *dadosBackup;
+
+    if( dadosBackup == NULL ){
+        dadosBackup = fopen( estruturaBackup, "w" );
+        if( dadosBackup != NULL ){
+            return true;
+        }else{
+            return false;}
+    }else{
+        dadosBackup = fopen( estruturaBackup, "r+" );
+        if( dadosBackup != NULL ){
+            return true;
+        }else{
+            return false;}}
+}
+bool criaBackup( int *TAMANHOS, int *quantidades, coluna **BASE){
+    int corredor = 0;
+    coluna *elemento;
+    FILE *arquivosDadosBackup = fopen( estruturaBackup, "w+" );
+
+    if( arquivosDadosBackup != NULL ){
+        for( int colunas = 0; colunas < TAM_BASE; colunas++ ){
+            backup.quantidadesBackup = quantidades[colunas];
+            backup.TAMANHOBackup = TAMANHOS[colunas];
+            elemento =  BASE[colunas];
+            backup.DADOS = (int*)(malloc(TAMANHOS[colunas]*sizeof(int) ) );
+            
+            while( elemento != NULL ){
+                backup.DADOS[corredor] = elemento->valor;
+                elemento = elemento->next;
+                corredor++;}
+            fseek( arquivosDadosBackup, colunas*sizeof backup, SEEK_SET );
+            fwrite( &backup, sizeof backup, 1, arquivosDadosBackup ); 
+        }
+        return true;
+    }else{ return false; }
+}
+bool recuperaBackup( int *TAMANHOS, int *quantidades, coluna **BASE ){
+    int corredor = 0;
+    coluna *elemento;
+    FILE *arquivosDadosBackup = fopen( estruturaBackup, "r" );
+
+    if( arquivosDadosBackup != NULL ){
+        for( int colunas = 0; colunas < TAM_BASE; colunas++ ){
+            fseek( arquivosDadosBackup, colunas*sizeof backup, SEEK_SET );
+            fread( &backup, sizeof backup, 1, arquivosDadosBackup ); 
+            
+            quantidades[colunas] = backup.quantidadesBackup;
+            TAMANHOS[colunas] = backup.TAMANHOBackup;
+            elemento = BASE[colunas];
+            if( TAMANHOS[colunas] > 0 )
+                criaColuna( TAMANHOS[colunas], &BASE[colunas]);
+            while( elemento != NULL ){
+                elemento->valor = backup.DADOS[corredor];
+                elemento = elemento->next;
+                corredor++;}
+        }
+        return true;
+    }else{ return false; }
 }
 #endif
