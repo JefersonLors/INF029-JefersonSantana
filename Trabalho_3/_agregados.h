@@ -264,62 +264,62 @@ void listagGeralOrdenada( int *quantidade, coluna **BASE ){
 bool criarArquivos( ){
     FILE *dadosBackup;
 
-    if( dadosBackup == NULL ){
+    if( ( dadosBackup = fopen(estruturaBackup, "r" ) ) == NULL ){
         dadosBackup = fopen( estruturaBackup, "w" );
         if( dadosBackup != NULL ){
+            fclose( dadosBackup );
             return true;
         }else{
             return false;}
     }else{
         dadosBackup = fopen( estruturaBackup, "r+" );
         if( dadosBackup != NULL ){
+            fclose( dadosBackup );
             return true;
         }else{
+            fclose( dadosBackup );
             return false;}}
 }
 bool criaBackup( int *TAMANHOS, int *quantidades, coluna **BASE){
     int corredor = 0;
     coluna *elemento;
-    FILE *arquivosDadosBackup = fopen( estruturaBackup, "w+" );
+    FILE *arquivoDadosBackup = fopen( estruturaBackup, "w+" );
 
-    if( arquivosDadosBackup != NULL ){
+    if( arquivoDadosBackup != NULL ){
         for( int colunas = 0; colunas < TAM_BASE; colunas++ ){
-            backup.quantidadesBackup = quantidades[colunas];
-            backup.TAMANHOBackup = TAMANHOS[colunas];
-            elemento =  BASE[colunas];
-            backup.DADOS = (int*)(malloc(TAMANHOS[colunas]*sizeof(int) ) );
-            
+            fprintf( arquivoDadosBackup, "%d %d\n", 
+                     TAMANHOS[colunas], quantidades[colunas] );
+            elemento = BASE[colunas];
             while( elemento != NULL ){
-                backup.DADOS[corredor] = elemento->valor;
-                elemento = elemento->next;
-                corredor++;}
-            fseek( arquivosDadosBackup, colunas*sizeof backup, SEEK_SET );
-            fwrite( &backup, sizeof backup, 1, arquivosDadosBackup ); 
+                fprintf( arquivoDadosBackup, "%d ", elemento->valor );
+                elemento = elemento->next;}
         }
+        fclose( arquivoDadosBackup );
         return true;
     }else{ return false; }
 }
 bool recuperaBackup( int *TAMANHOS, int *quantidades, coluna **BASE ){
     int corredor = 0;
     coluna *elemento;
-    FILE *arquivosDadosBackup = fopen( estruturaBackup, "r" );
+    FILE *arquivoDadosBackup = fopen( estruturaBackup, "r" );
 
-    if( arquivosDadosBackup != NULL ){
+    if( arquivoDadosBackup != NULL ){
         for( int colunas = 0; colunas < TAM_BASE; colunas++ ){
-            fseek( arquivosDadosBackup, colunas*sizeof backup, SEEK_SET );
-            fread( &backup, sizeof backup, 1, arquivosDadosBackup ); 
-            
-            quantidades[colunas] = backup.quantidadesBackup;
-            TAMANHOS[colunas] = backup.TAMANHOBackup;
+            fscanf( arquivoDadosBackup, "%d %d\n", 
+                     &TAMANHOS[colunas], &quantidades[colunas] );
+        
+            if( TAMANHOS[colunas] > 0 ){
+                criaColuna( TAMANHOS[colunas], &BASE[colunas] );}
+
             elemento = BASE[colunas];
-            if( TAMANHOS[colunas] > 0 )
-                criaColuna( TAMANHOS[colunas], &BASE[colunas]);
+
             while( elemento != NULL ){
-                elemento->valor = backup.DADOS[corredor];
-                elemento = elemento->next;
-                corredor++;}
+                fscanf( arquivoDadosBackup, "%d ", &elemento->valor );
+                elemento = elemento->next;}
         }
+        fclose( arquivoDadosBackup );
         return true;
-    }else{ return false; }
+    }else{ 
+        return false; }
 }
 #endif
