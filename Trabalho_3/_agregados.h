@@ -8,12 +8,6 @@ typedef struct numero{
     struct numero *next;
 }coluna;
 
-struct{
-    int quantidadesBackup,
-        TAMANHOBackup,
-        *DADOS;
-}backup;
-
 char *estruturaBackup = "estruturaBackup.txt";
 
 unsigned MENU( void );
@@ -58,7 +52,7 @@ unsigned menuColunas( void ){
 
     while( resposta < 0 || resposta > 10){
         printf( "\nOpção inválida!\n\n" 
-                "\n[R] = " );
+                "\n[ ] = " );
         scanf( "%d", &resposta );}
     return resposta;
 }
