@@ -42,7 +42,7 @@ int main( ){
                             "TAMANHO COLUNA: %d\n\n", resposta, TAMANHOS[resposta-1] );
                     
                     if( quantidade[resposta-1] + 1 <= TAMANHOS[resposta-1] ){
-                        printf( "[%d] = ", quantidade[resposta-1]+1 );
+                        printf( "[%d] <- ", quantidade[resposta-1]+1 );
                         scanf( "%d", &valor );
                         
                         if( valor == 0 ){
@@ -76,7 +76,7 @@ int main( ){
                             "\n\nINSIRA O ELEMENTO DA COLUNA [%d] PARA EXCLUIR [0 SAIR]\n\n"
                             , resposta, resposta );
                     
-                    printf( "[X] = " );
+                    printf( "[X] <- " );
                     scanf( "%d", &valor );
                     
                     if( valor == 0 ){
@@ -98,7 +98,7 @@ int main( ){
                             "\n\nINSIRA O TAMANHO DO COMPLEMENTO PARA A COLUNA [%d] [0 SAIR]\n\n"
                             , resposta, resposta );
                     
-                    printf( "[+] = " );
+                    printf( "[+] <- " );
                     scanf( "%d", &valor );
                     
                     if( valor == 0 ){

@@ -24,13 +24,13 @@ unsigned MENU( void ){
     
     do{ printf( "\n================== BANCO DINÂMICO ==================\n\n"
                 "    MENU\n"
-                " [1] <- INSERIR ELEMENTO\n"
-                " [2] <- LISTAR TODOS OS ELEMENTOS\n"
-                " [3] <- LISTAR ELEMENTOS ORDENADOS\n"
-                " [4] <- LISTAR TODOS OS ELEMENTOS ORDENADOS\n"
-                " [5] <- EXCLUIR ELEMENTO\n"
-                " [6] <- INCREMENTAR ESTRUTURA\n"
-                " [7] <- SAIR\n\n"
+                " [1] INSERIR ELEMENTO\n"
+                " [2] LISTAR TODOS OS ELEMENTOS\n"
+                " [3] LISTAR ELEMENTOS ORDENADOS\n"
+                " [4] LISTAR TODOS OS ELEMENTOS ORDENADOS\n"
+                " [5] EXCLUIR ELEMENTO\n"
+                " [6] INCREMENTAR ESTRUTURA\n"
+                " [7] SAIR\n\n"
                 " [R] <- " );
         scanf( "%u", &resposta ); getchar( );
     }while( resposta > 7 || resposta < 1 );
@@ -40,12 +40,12 @@ unsigned menuColunas( void ){
     int resposta = 0;
         printf( "SELECIONE A COLUNA PARA INSERIR O ELEMENTO [0 SAIR]\n\n"
             " [1]  [2]  [3]  [4]  [5]  [6]  [7]  [8]  [9]  [10]\n\n"
-            " [ ] = " );
+            " [ ] <- " );
     scanf( "%d", &resposta );
 
     while( resposta < 0 || resposta > 10){
         printf( "\nOpção inválida!\n\n" 
-                "\n[R] = " );
+                "\n[ ] <- " );
         scanf( "%d", &resposta );}
     return resposta;
 }
@@ -65,11 +65,11 @@ short getTamanho( void ){
 
     printf( "\n|Ops! Essa lista não tem espaço      |\n"
                 "|Digite o tamanho dela para criarmos.|\n\n"
-                "Novo tamanho = ");
+                "Novo tamanho <- ");
     scanf( "%d", &tamanho );    
     while( tamanho < 1 ){
         printf( "\n{ Tamanho inválido! }\n\n"
-                "Novo tamanho = " );
+                "Novo tamanho <- " );
         scanf( "%d", &tamanho );}
     return tamanho;
 }
