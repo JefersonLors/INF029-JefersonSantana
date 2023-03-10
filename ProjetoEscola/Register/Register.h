@@ -25,6 +25,8 @@ bool solicitaCodigo();
 bool solicitaSemestre();
 bool solicitaVagas();
 bool solicitaProfessor();
+
+bool matriculaProfessorNaDisciplina(unsigned);
 ///==========//==========//=========//=========//
 
 bool cadastrarProfessor() {
@@ -475,8 +477,20 @@ bool solicitaProfessor() {
     materia[posicao].professorId =
         docenteId + 1; /// os professores comecam a ser inseridos do 1 com id
                        /// para ministrar disciplina
-    atualizaCadastroProfessor(docenteId);
+    matriculaProfessorNaDisciplina(docenteId);
   }
   return true;
+}
+bool matriculaProfessorNaDisciplina(unsigned docenteId){
+  FILE *cadastroProfessorFPtr = fopen(arquivoDeProfessores, "r+");
+
+  if (!cadastroProfessorFPtr) {
+    return false;
+  } else {
+    fseek(cadastroProfessorFPtr, docenteId * sizeof(Professor), SEEK_SET);
+    fwrite(&docente[docenteId], sizeof(Professor), 1, cadastroProfessorFPtr);
+    fclose(cadastroProfessorFPtr);
+    return true;
+  }
 }
 #endif /// Register_h_included

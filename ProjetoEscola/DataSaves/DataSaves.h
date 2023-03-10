@@ -1,4 +1,4 @@
-#include "../DataStructs/DataStructs.h";
+#include "../DataStructs/DataStructs.h"
 #include <stdio.h>
 
 #ifndef DataSaves_h_included

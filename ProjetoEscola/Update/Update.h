@@ -983,14 +983,9 @@ bool atualizaCadastroAluno(unsigned idAluno) {
   }
 }
 bool atualizaCadastroProfessor(unsigned idProfessor) {
-  FILE *cadastroProfessorFPtr = fopen(arquivoDeProfessores, "r+");
-
-  if (!cadastroProfessorFPtr) {
+    if (!matriculaProfessorNaDisciplina(idProfessor)){
     return false;
   } else {
-    fseek(cadastroProfessorFPtr, idProfessor * sizeof(Professor), SEEK_SET);
-    fwrite(&docente[idProfessor], sizeof(Professor), 1, cadastroProfessorFPtr);
-    fclose(cadastroProfessorFPtr);
     return true;
   }
 }

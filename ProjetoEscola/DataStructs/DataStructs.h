@@ -74,10 +74,10 @@ struct {
 ///==========//==========//=========//=========//
 
 /// SEÇÃO DE ARQUIVOS
-char *arquivoDeProfessores = "ProjetoEscola/DataBase/arquivo_de_professores.txt";
-char *arquivoDeAlunos = "ProjetoEscola/DataBase/arquivo_de_alunos.txt";
-char *arquivoDeDisciplinas = "ProjetoEscola/DataBase/arquivo_de_disciplinas.txt";
-char *arquivoDeDadosGerais = "ProjetoEscola/DataBase/arquivo_de_dados_gerais.txt";
+char *arquivoDeProfessores = "../ProjetoEscola/DataBase/arquivo_de_professores.txt";
+char *arquivoDeAlunos = "../ProjetoEscola/DataBase/arquivo_de_alunos.txt";
+char *arquivoDeDisciplinas = "../ProjetoEscola/DataBase/arquivo_de_disciplinas.txt";
+char *arquivoDeDadosGerais = "../ProjetoEscola/DataBase/arquivo_de_dados_gerais.txt";
 
 /// DADOS QUANTITATIVOS PARA CONTROLE
 int professoresCadastrados = 0;
