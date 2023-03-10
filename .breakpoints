@@ -1,3 +1,20 @@
 {
-  "files": {}
+  "files": {
+    "Lista_1_Respostas/l1q9.c": [
+      {
+        "id": "7257c085-102d-45f8-98bc-c52c2fa139c4",
+        "line": 169,
+        "version": 3147,
+        "index": 5667
+      }
+    ],
+    "Trabalho_2/agregados.h": [
+      {
+        "id": "b054ac95-e1a4-4cbd-844a-8ddf0b37e95d",
+        "line": 1,
+        "version": 5891,
+        "index": 8
+      }
+    ]
+  }
 }
