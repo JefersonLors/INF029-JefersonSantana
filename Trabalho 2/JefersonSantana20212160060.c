@@ -21,98 +21,312 @@
 
 baseStruct *base = NULL;
 
-int main()
+int Main()
 {
   inicializar();
   printf("Cria Estrutura\n");
   criarEstruturaAuxiliar(1, 4);
+  criarEstruturaAuxiliar(10, 4);
   showAuxStruct(1);
 
   /*teste insere*/
   printf("\nInsere: ");
+  inserirNumeroEmEstrutura(1, 213);
+  printf("length B1 => %d\n", base[0].length);
+  showAuxStruct(1);
+
+  printf("\nInsere: ");
   inserirNumeroEmEstrutura(1, 2);
   printf("length B1 => %d\n", base[0].length);
   showAuxStruct(1);
-  
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(1, 13);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
+
   printf("\nInsere: ");
   inserirNumeroEmEstrutura(1, 103);
   printf("length B1 => %d\n", base[0].length);
   showAuxStruct(1);
 
   printf("\nInsere: ");
-  inserirNumeroEmEstrutura(1, 213);
+  inserirNumeroEmEstrutura(1, 13);
   printf("length B1 => %d\n", base[0].length);
   showAuxStruct(1);
 
-  /*teste exclui especifico*/
-  printf("\nExclui: ");
-  excluirNumeroEspecificoDeEstrutura(1, 103);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
-  
-  printf("\nExclui: ");
-  excluirNumeroEspecificoDeEstrutura(1, 5);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
+  printf("\nInsere: ");
+  inserirNumeroEmEstrutura(10, 213);
+  printf("length B10 => %d\n", base[9].length);
+  showAuxStruct(10);
 
-  printf("\nExclui: ");
-  excluirNumeroEspecificoDeEstrutura(1, 2);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
+  printf("\nInsere: ");
+  inserirNumeroEmEstrutura(10, 17);
+  printf("length B10 => %d\n", base[9].length);
+  showAuxStruct(10);
 
-  // printf("\nExclui: ");
-  // excluirNumeroDoFinaldaEstrutura(1);
-  // printf("length B1 => %d\n", base[0].length);
-  // showAuxStruct(1);
-  
-  // printf("\nExclui: ");
-  // excluirNumeroDoFinaldaEstrutura(1);
-  // printf("length B1 => %d\n", base[0].length);
-  // showAuxStruct(1);
+  printf("\nInsere: ");
+  inserirNumeroEmEstrutura(10, 50);
+  printf("length B10 => %d\n", base[9].length);
+  showAuxStruct(10);
 
-  // printf("\nExclui: ");
-  // excluirNumeroDoFinaldaEstrutura(1);
-  // printf("length B1 => %d\n", base[0].length);
-  // showAuxStruct(1);
+  int result = inserirNumeroEmEstrutura(10, 987);
+  showAuxStruct(10);
 
-  /*Teste exclui ultimo*/
-  // printf("\nExclui: ");
-  // excluirNumeroDoFinaldaEstrutura(1);
-  // printf("length B1 => %d\n", base[0].length);
-  // showAuxStruct(1);
+  No *lista = montarListaEncadeadaComCabecote();
+  destruirListaEncadeadaComCabecote(&lista);
+  finalizar();
 
-  // printf("\nExclui: ");
-  // excluirNumeroDoFinaldaEstrutura(1);
-  // printf("length B1 => %d\n", base[0].length);
-  // showAuxStruct(1);
-  
-  // printf("\nExclui: ");
-  // excluirNumeroDoFinaldaEstrutura(1);
-  // printf("length B1 => %d\n", base[0].length);
-  // showAuxStruct(1);
+  // int *auxK = (int *)malloc(sizeof(int) * getListSize(lista) + 1);
 
-  // printf("\nExclui: ");
-  // excluirNumeroDoFinaldaEstrutura(1);
-  // printf("length B1 => %d\n", base[0].length);
-  // showAuxStruct(1);
+  // getDadosListaEncadeadaComCabecote(lista, auxK);
 
-  // printf("\nbase 1 => %d\n", base[0].length);
-
-  // int *aux = NULL;
-  
-  // getDadosEstruturaAuxiliar(1, aux);
+  // printf("lista: [s = %d]", getListSize(lista));
 
   // int i = 0;
 
-  // while(aux[i] != EMPTY ){
-  //   printf("%d\t", aux[i]);
+  // while (auxK[i] != EMPTY)
+  // {
+  //   printf("%d\t", auxK[i]);
+  //   i++;
   // }
 }
-int getDadosEstruturaAuxiliar(int position, int *auxVector)
+/// FUNÇÕES BÁSICAS DOS PROGRAMA
+void finalizar()
+{
+  int i = 0;
+
+  while (i < TAM)
+  {
+    deleteList(&base[i].auxStruct);
+    i++;
+  }
+}
+void destruirListaEncadeadaComCabecote(No **init)
+{
+  No *act = *init;
+  No *prev = NULL;
+
+  while (act)
+  {
+    prev = act;
+    act = act->prox;
+    free(prev);
+    prev = NULL;
+  }
+  *init = NULL;
+}
+void getDadosListaEncadeadaComCabecote(No *init, int auxVector[])
+{
+  No *act = init;
+
+  int i = 0;
+
+  while (act)
+  {
+    auxVector[i] = act->conteudo;
+    act = act->prox;
+    i++;
+  }
+  auxVector[i] = EMPTY;
+}
+No *montarListaEncadeadaComCabecote()
+{
+  No *init = NULL;
+  No *end = NULL;
+
+  No *first = NULL;
+  No *new = NULL;
+  No *last = NULL;
+
+  int i = 0;
+
+  while (i < TAM)
+  {
+    if (base[i].auxStructExists && !base[i].isEmpty)
+    {
+      auxStruct *act = base[i].auxStruct;
+
+      new = (No *)malloc(sizeof(No));
+      new->conteudo = act->value;
+      new->prox = NULL;
+      first = new;
+      last = new;
+
+      act = act->next;
+      while (act && !act->isEmpty)
+      {
+        new = (No *)malloc(sizeof(No));
+
+        new->conteudo = act->value;
+        new->prox = NULL;
+        last->prox = new;
+        last = new;
+
+        act = act->next;
+      }
+      if (!last)
+      {
+        end = last;
+      }
+    }
+    if (!init)
+    {
+      init = first;
+    }
+    if (end)
+    {
+      end->prox = first;
+    }
+    end = last;
+
+    i++;
+  }
+  last->prox = NULL;
+  return init;
+}
+int modificarTamanhoEstruturaAuxiliar(int position, int newSize)
+{
+  if (outOfRange(position))
+  {
+    return POSICAO_INVALIDA;
+  }
+  else if (!base[position - 1].auxStructExists)
+  {
+    return SEM_ESTRUTURA_AUXILIAR;
+  }
+  else if ((base[position - 1].size_max + newSize) < 1)
+  {
+    return NOVO_TAMANHO_INVALIDO;
+  }
+  else
+  {
+    int resizeTo = base[position - 1].size_max + newSize;
+    auxStruct *last = base[position - 1].auxStruct;
+
+    if (resizeTo > base[position - 1].size_max)
+    {
+      while (last->next)
+      {
+        last = last->next;
+      }
+      last->next = createAuxStruct(newSize);
+      if (newSize > 0 && !last->next)
+      {
+        return SEM_ESPACO_DE_MEMORIA;
+      }
+      else
+      {
+        base[position - 1].size_max = base[position - 1].size_max + newSize;
+
+        if (base[position - 1].isFull)
+        {
+          base[position - 1].isFull = !base[position - 1].isFull;
+        }
+      }
+    }
+    else
+    {
+      int i = 0;
+      while (i < resizeTo-1)
+      {
+        last = last->next;
+        i++;
+      }
+      deleteList(&last->next);
+      last->next = NULL;
+      base[position - 1].size_max = resizeTo;
+
+      if (base[position - 1].isFull)
+      {
+        base[position - 1].length = resizeTo;
+      }
+      else if( base[position - 1].length > resizeTo ){
+        if( !base[position - 1].isFull ){
+          base[position - 1].isFull = !base[position - 1].isFull;
+        }
+        base[position - 1].length = resizeTo;
+      }
+    }
+    return SUCESSO;
+  }
+}
+int getQuantidadeElementosEstruturaAuxiliar(int position)
+{
+  if (outOfRange(position))
+  {
+    return POSICAO_INVALIDA;
+  }
+  else if (!base[position - 1].auxStructExists)
+  {
+    return SEM_ESTRUTURA_AUXILIAR;
+  }
+  else if (base[position - 1].isEmpty)
+  {
+    return ESTRUTURA_AUXILIAR_VAZIA;
+  }
+  else
+  {
+    return base[position - 1].length;
+  }
+}
+int getDadosOrdenadosDeTodasEstruturasAuxiliares(int auxVector[])
+{
+  int result = getDadosDeTodasEstruturasAuxiliares(auxVector);
+
+  if (result == SUCESSO)
+  {
+    insertionSort(auxVector, getVectorSize(auxVector, EMPTY));
+  }
+  return result;
+}
+int getDadosDeTodasEstruturasAuxiliares(int auxVector[])
+{
+  int i = 0;
+
+  while (i < TAM)
+  {
+    if ( !base[i].isEmpty)
+    {
+      break;
+    }
+    i++;
+  }
+  if (i == TAM)
+  {
+    return TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+  }
+  else
+  {
+    int i = 0;
+    int totalSize = 0;
+
+    while( base[i].isEmpty ){
+      i++;
+    }
+    totalSize += base[i].length;
+
+    getDadosEstruturaAuxiliar(i + 1, auxVector);
+    i++;
+
+    while (i < TAM)
+    {
+      if( !base[i].isEmpty ){
+        getDadosEstruturaAuxiliar(i + 1, &auxVector[totalSize]);
+        totalSize += base[i].length;
+      }
+      i++;
+    }
+    auxVector[totalSize] = EMPTY;
+    return SUCESSO;
+  }
+}
+int getDadosOrdenadosEstruturaAuxiliar(int position, int auxVector[])
+{
+  int result = getDadosEstruturaAuxiliar(position, auxVector);
+
+  if (result == SUCESSO)
+  {
+    insertionSort(auxVector, base[position - 1].length);
+  }
+  return result;
+}
+int getDadosEstruturaAuxiliar(int position, int auxVector[])
 {
   if (outOfRange(position))
   {
@@ -124,21 +338,17 @@ int getDadosEstruturaAuxiliar(int position, int *auxVector)
   }
   else
   {
-    int length = base[position - 1].length;
-
-    auxVector = (int *)malloc(sizeof(int) * length+1);
-
     auxStruct *actFloor = base[position - 1].auxStruct;
 
     int i = 0;
-    while( i < length && actFloor ){
-      puts("aqui");
+    int length = base[position - 1].length;
+
+    while (i < length && actFloor)
+    {
       auxVector[i] = actFloor->value;
       actFloor = actFloor->next;
-      printf("%d -> %d\n", i, auxVector[i] );
       i++;
-    } 
-    auxVector[i] = EMPTY;
+    }
     return SUCESSO;
   }
 }
@@ -147,6 +357,10 @@ int criarEstruturaAuxiliar(int position, int size)
   if (outOfRange(position))
   {
     return POSICAO_INVALIDA;
+  }
+  else if (size < 1)
+  {
+    return TAMANHO_INVALIDO;
   }
   else if (base[position - 1].auxStructExists)
   {
@@ -194,11 +408,10 @@ int inserirNumeroEmEstrutura(int position, int value)
       actFloor->isEmpty = !actFloor->isEmpty;
       base[position - 1].length++;
       base[position - 1].isEmpty = !base[position - 1].isEmpty;
-      return SUCESSO;
     }
     else
     {
-      while (actFloor->next && !actFloor->next->isEmpty )
+      while (actFloor->next && !actFloor->next->isEmpty)
       {
         actFloor = actFloor->next;
       }
@@ -210,14 +423,14 @@ int inserirNumeroEmEstrutura(int position, int value)
 
       if (!actFloor->next || base[position - 1].length == base[position - 1].size_max)
       {
-        base[position - 1].isFull = !base[position - 1].isFull;
+        base[position - 1].isFull = true;
       }
       if (base[position - 1].isEmpty == true)
       {
-        base[position - 1].isEmpty = !base[position - 1].isEmpty;
+        base[position - 1].isEmpty = false;
       }
-      return SUCESSO;
     }
+    return SUCESSO;
   }
 }
 int excluirNumeroDoFinaldaEstrutura(int position)
@@ -247,12 +460,13 @@ int excluirNumeroDoFinaldaEstrutura(int position)
 
     base[position - 1].length--;
 
-    if( base[position - 1].length == 0 ){
-      base[position - 1].isEmpty = !base[position - 1].isEmpty;
+    if (base[position - 1].length == 0)
+    {
+      base[position - 1].isEmpty = true;
     }
     if (base[position - 1].isFull)
     {
-      base[position - 1].isFull = !base[position - 1].isFull;
+      base[position - 1].isFull = false;
     }
     return SUCESSO;
   }
@@ -284,37 +498,28 @@ int excluirNumeroEspecificoDeEstrutura(int position, int value)
           actFloor->value = actFloor->next->value;
           actFloor = actFloor->next;
         }
-        
+
         actFloor->isEmpty = !actFloor->isEmpty;
         actFloor->value = EMPTY;
         base[position - 1].length--;
 
         if (base[position - 1].isFull)
         {
-          base[position - 1].isFull = !base[position - 1].isFull;
+          base[position - 1].isFull = false;
         }
-        if( base[position - 1].length == 0 ){
-          base[position - 1].isEmpty = !base[position - 1].isEmpty;
+        if (base[position - 1].length == 0)
+        {
+          base[position - 1].isEmpty = true;
         }
         return SUCESSO;
       }
-      if( !actFloor->next || actFloor->next->isEmpty){
+      if (!actFloor->next || actFloor->next->isEmpty)
+      {
         return NUMERO_INEXISTENTE;
       }
       actFloor = actFloor->next;
     }
     return NUMERO_INEXISTENTE;
-  }
-}
-bool outOfRange(int position)
-{
-  if (position < 1 || position > TAM)
-  {
-    return true;
-  }
-  else
-  {
-    return false;
   }
 }
 void inicializar()
@@ -328,8 +533,22 @@ void inicializar()
     base[i].auxStructExists = false;
     base[i].length = 0;
     base[i].size_max = 0;
+    base[i].isEmpty = true;
     base[i].isFull = false;
     i++;
+  }
+}
+
+// OUTRAS FUNÇÕES UTILIZADAS NO PROGRAMA
+bool outOfRange(int position)
+{
+  if (position < 1 || position > TAM)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
   }
 }
 auxStruct *createAuxStruct(int size)
@@ -368,8 +587,57 @@ void showAuxStruct(int position)
     }
     else
     {
-      printf("%d -> %s\n", act->value, (act->isEmpty ? "vazio" : "nao vazio") );
+      printf("%d -> %s\n", act->value, (act->isEmpty ? "vazio" : "nao vazio"));
     }
     act = act->next;
   }
+}
+void insertionSort(int *vector, int size)
+{
+  int key;
+
+  for (int i = 1; i < size; i++)
+  {
+    key = vector[i];
+    int j = i - 1;
+    while (j >= 0 && vector[j] > key)
+    {
+      vector[j + 1] = vector[j];
+      j--;
+    }
+    vector[j + 1] = key;
+  }
+}
+int getVectorSize(int *vector, int ends)
+{
+  int i = 0;
+  while (vector[i] != ends)
+    i++;
+  return i;
+}
+int getListSize(No *init)
+{
+  No *act = init;
+  int i = 0;
+
+  while (act)
+  {
+    i++;
+    act = act->prox;
+  }
+  return i;
+}
+void deleteList(auxStruct **init)
+{
+  auxStruct *actAux = *init;
+  auxStruct *prevAux = NULL;
+
+  while (actAux)
+  {
+    prevAux = actAux;
+    actAux = actAux->next;
+    free(prevAux);
+    prevAux = NULL;
+  }
+  *init = NULL;
 }
