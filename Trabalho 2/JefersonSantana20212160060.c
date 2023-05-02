@@ -23,68 +23,7 @@ baseStruct *base = NULL;
 
 int Main()
 {
-  inicializar();
-  printf("Cria Estrutura\n");
-  criarEstruturaAuxiliar(1, 4);
-  criarEstruturaAuxiliar(10, 4);
-  showAuxStruct(1);
 
-  /*teste insere*/
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(1, 213);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
-
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(1, 2);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
-
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(1, 103);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
-
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(1, 13);
-  printf("length B1 => %d\n", base[0].length);
-  showAuxStruct(1);
-
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(10, 213);
-  printf("length B10 => %d\n", base[9].length);
-  showAuxStruct(10);
-
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(10, 17);
-  printf("length B10 => %d\n", base[9].length);
-  showAuxStruct(10);
-
-  printf("\nInsere: ");
-  inserirNumeroEmEstrutura(10, 50);
-  printf("length B10 => %d\n", base[9].length);
-  showAuxStruct(10);
-
-  int result = inserirNumeroEmEstrutura(10, 987);
-  showAuxStruct(10);
-
-  No *lista = montarListaEncadeadaComCabecote();
-  destruirListaEncadeadaComCabecote(&lista);
-  finalizar();
-
-  // int *auxK = (int *)malloc(sizeof(int) * getListSize(lista) + 1);
-
-  // getDadosListaEncadeadaComCabecote(lista, auxK);
-
-  // printf("lista: [s = %d]", getListSize(lista));
-
-  // int i = 0;
-
-  // while (auxK[i] != EMPTY)
-  // {
-  //   printf("%d\t", auxK[i]);
-  //   i++;
-  // }
 }
 /// FUNÇÕES BÁSICAS DOS PROGRAMA
 void finalizar()
@@ -123,7 +62,6 @@ void getDadosListaEncadeadaComCabecote(No *init, int auxVector[])
     act = act->prox;
     i++;
   }
-  auxVector[i] = EMPTY;
 }
 No *montarListaEncadeadaComCabecote()
 {
@@ -270,8 +208,8 @@ int getDadosOrdenadosDeTodasEstruturasAuxiliares(int auxVector[])
   int result = getDadosDeTodasEstruturasAuxiliares(auxVector);
 
   if (result == SUCESSO)
-  {
-    insertionSort(auxVector, getVectorSize(auxVector, EMPTY));
+  { 
+    insertionSort(auxVector, getMinimumVectorSize() );
   }
   return result;
 }
@@ -312,7 +250,6 @@ int getDadosDeTodasEstruturasAuxiliares(int auxVector[])
       }
       i++;
     }
-    auxVector[totalSize] = EMPTY;
     return SUCESSO;
   }
 }
@@ -595,7 +532,7 @@ void showAuxStruct(int position)
 void insertionSort(int *vector, int size)
 {
   int key;
-
+  
   for (int i = 1; i < size; i++)
   {
     key = vector[i];
@@ -608,12 +545,16 @@ void insertionSort(int *vector, int size)
     vector[j + 1] = key;
   }
 }
-int getVectorSize(int *vector, int ends)
+int getMinimumVectorSize()
 {
   int i = 0;
-  while (vector[i] != ends)
+  int size = 0;
+  
+  while ( i < TAM){
+    size += base[i].length;
     i++;
-  return i;
+  }
+  return size;
 }
 int getListSize(No *init)
 {

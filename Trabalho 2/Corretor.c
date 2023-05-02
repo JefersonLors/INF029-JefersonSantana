@@ -271,18 +271,7 @@ void testeListaEncadeada()
     No *inicio = montarListaEncadeadaComCabecote();
     No *act = inicio;
 
-    // while( act ){
-    //   printf("%d\t", act->conteudo);
-    //   act = act->prox;
-    // }
-
     getDadosListaEncadeadaComCabecote(inicio, vet);
-    //  int i = 0;
-    // while( i < 9 ){
-    //   printf("%d\t", vet2[i]);
-    //   i++;
-    // }
-    // putchar('\n');
     printf("%d\n", vet[0] == 3);
     printf("%d\n", vet[1] == 4);
     printf("%d\n", vet[2] == -2);

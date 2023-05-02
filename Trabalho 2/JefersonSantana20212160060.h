@@ -82,7 +82,7 @@ bool outOfRange(int posicao);
 void showAuxStruct(int position);
 auxStruct *createAuxStruct(int size);
 void insertionSort(int *vector, int size);
-int getVectorSize(int *vector, int ends);
+int getMinimumVectorSize( );
 int getListSize( No *init );
 void deleteList( auxStruct ** );
 #endif
